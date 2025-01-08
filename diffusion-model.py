@@ -48,38 +48,24 @@ x = np.arange(start=0,stop=Lx,step=dx)
 nx = len(x)
 #this creates the grid space
 
-
 # In[ ]:
-
-
 whos
-
-
 # In[ ]:
-
-
 #subscripting an array
 #first element of array, start counting at zero
 x[0]
 
-
 # In[ ]:
-
 
 x[nx-1] #starts counting at zero
 
-
 # In[ ]:
-
 
 x[-1]
 
-
 # In[ ]:
 
-
 x[0:5]
-
 
 # Set the initial concentration profile for the model. 
 # The concentration `C` is a step function
@@ -89,7 +75,6 @@ x[0:5]
 
 # In[ ]:
 
-
 C = np.zeros_like(x) #zeros func makes an array of 
 #zeros, zeros_like func makes an array of zeros that is 
 #like another array
@@ -98,11 +83,9 @@ C_right = 0
 C[x <= Lx//2] = C_left
 C[x > Lx//2] = C_right
 
-
 # Plot the initial profile.
 
 # In[ ]:
-
 
 plt.figure()
 plt.plot(x, C, "r")
@@ -110,29 +93,21 @@ plt.xlabel("x")
 plt.ylabel("C")
 plt.title("Initial concentration profile")
 
-
 # Set the start time of the model and the number of time steps. Calculate a stable time step for the model using a stability criterion.
 
 # In[ ]:
-
 
 time = 0
 nt = 5000
 dt = 0.5 * (dx**2 / D) #** is a power (squared)
 
-
 # In[ ]:
-
-
 dt
-
 
 # Loop over the time steps of the model, solving the diffusion equation using the FTCS explicity scheme described above.
 # The boundary conditions are fixed, so reset them at each time step.
 
 # In[ ]:
-
-
 for t in range(0, nt): #this is a for loop which executes a statement or group of statements a set number of times. 
     C += D * dt / dx**2 * (np.roll(C, -1) - 2*C + np.roll(C,1))
     #D = 100, Lx = 300, dx = 0.5, 
@@ -141,26 +116,19 @@ for t in range(0, nt): #this is a for loop which executes a statement or group o
     #np.roll shifts to right or left (-1 = left, 1 = right)
     C[0] = C_left
     C[-1] = C_right
-
-
 # Plot the result
 
 # In[ ]:
-
-
 plt.figure()
 plt.plot(x, C, "b")
 plt.xlabel("X")
 plt.ylabel("C")
 plt.title("Final concentration profile")
 
-
-# In[ ]:
-
+# In[ ]
 
 z = np.arange(5)
 z
-
 
 # In[ ]:
 
